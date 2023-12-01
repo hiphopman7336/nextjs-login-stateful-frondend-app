@@ -1,3 +1,4 @@
+import { signIn } from 'next-auth/react';
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials"
 
@@ -10,6 +11,8 @@ const handler = NextAuth({
                 username: { label: "Username", type: "text" },
                 password: { label: "Password", type: "password"},
             },
+
+            //https://www.melivecode.com/
             async authorize(credentials) { 
                 const res = await fetch('https://www.melivecode.com/api/login', { 
                     method: 'POST',
@@ -24,7 +27,10 @@ const handler = NextAuth({
                 return null
             }
         })
-    ]
+    ],
+    pages: {
+        signIn:'/auth/signIn'
+    }
 
 
 })
